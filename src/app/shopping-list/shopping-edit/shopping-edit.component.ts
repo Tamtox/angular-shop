@@ -1,15 +1,19 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Ingredient } from '@/app/models/ingredient.model';
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.scss'],
 })
 export class ShoppingEditComponent {
-  name!: string;
-  amount!: number;
-  @Input() addIngredient!: (name: string, amount: number) => void;
+  @ViewChild('nameInput') nameInputRef!: ElementRef;
+  @ViewChild('amountInput') amountInputRef!: ElementRef;
+  @Output() ingredientAdded = new EventEmitter<Ingredient>();
   onSubmit(): void {
-    this.addIngredient(this.name, this.amount);
+    const newIngredient = new Ingredient(
+      this.nameInputRef.nativeElement.value,
+      this.amountInputRef.nativeElement.value
+    );
+    this.ingredientAdded.emit(newIngredient);
   }
 }
