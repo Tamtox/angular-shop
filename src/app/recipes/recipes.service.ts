@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from '@/app/models/recipe.model';
 import { Ingredient } from '../models/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -21,12 +21,17 @@ export class RecipesService {
       [new Ingredient('Minted Pineapple', 6), new Ingredient('Quick Tomato Mold', 4), new Ingredient('Lamb Meat', 2)]
     ),
   ];
-  selectedRecipe = new EventEmitter<Recipe>();
   constructor(private shoppingListService: ShoppingListService) {}
   getRecipes() {
     return this.recipes.slice();
   }
+  getRecipeById(id: string | null) {
+    return this.recipes.find((recipe) => recipe.id === id);
+  }
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredientsToShoppingList(ingredients);
+  }
+  deleteRecipe(id: string) {
+    this.recipes = this.recipes.filter((recipe) => recipe.id !== id);
   }
 }

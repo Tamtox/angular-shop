@@ -1,3 +1,6 @@
 export class Ingredient {
-  constructor(public name: string, public quantity: number) {}
+  id: string;
+  constructor(public name: string, public quantity: number) {
+    this.id = crypto.randomUUID();
+  }
 }
