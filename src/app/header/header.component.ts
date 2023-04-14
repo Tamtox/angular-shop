@@ -6,9 +6,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Output() address = new EventEmitter<string>();
   collapsed = true;
-  onSelect(address: string): void {
-    this.address.emit(address);
-  }
 }

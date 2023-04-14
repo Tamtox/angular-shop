@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shop';
-  currentPage = 'recipes';
-  navigate(address: string): void {
-    this.currentPage = address;
-  }
 }
